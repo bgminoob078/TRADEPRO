@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TradePro MLM</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <!-- Left Side - Branding -->
+        <div class="auth-brand">
+            <div class="brand-content">
+                <div class="brand-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>TradePro MLM</span>
+                </div>
+                <h2>Welcome Back!</h2>
+                <p>Sign in to continue your trading journey and manage your MLM network.</p>
+                
+                <div class="brand-features">
+                    <div class="feature-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure Login</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Mobile Optimized</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i>
+                        <span>24/7 Access</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-mini">
+                    <p>"The platform is incredibly user-friendly and secure!"</p>
+                    <div class="testimonial-author">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Michael R. - Gold Trader</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="auth-form-container">
+            <div class="auth-form">
+                <div class="form-header">
+                    <h1>Sign In</h1>
+                    <p>Access your trading dashboard</p>
+                </div>
+
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" required placeholder="Enter your password">
+                            <button type="button" class="password-toggle" onclick="togglePassword('password', 'passwordIcon')">
+                                <i class="fas fa-eye" id="passwordIcon"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <!-- Captcha Section -->
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-shield-alt"></i>
+                            Security Verification
+                        </label>
+                        <div class="captcha-container">
+                            <div class="captcha-display">
+                                <div class="captcha-code" id="captchaCode"></div>
+                                <button type="button" class="captcha-refresh" onclick="generateCaptcha()" title="Refresh Captcha">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="captcha-input" id="captchaInput" name="captcha" 
+                                   placeholder="Enter the code above" required>
+                        </div>
+                        <span class="error-message" id="captchaError"></span>
+                    </div>
+
+                    <div class="login-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+                </form>
+
+                <!-- Admin Login Shortcut -->
+                <div class="admin-login" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                    <p style="margin: 0 0 10px; font-size: 0.9rem; color: #6b7280;">Quick Admin Access:</p>
+                    <button type="button" class="btn btn-outline" onclick="adminLogin()" style="padding: 8px 16px; font-size: 0.9rem;">
+                        <i class="fas fa-user-shield"></i>
+                        Admin Login
+                    </button>
+                </div>
+
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="register.html" class="link">Create Account</a></p>
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    <a href="../index.html" class="btn btn-outline btn-full">
+                        <i class="fas fa-home"></i>
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reset Password</h3>
+                <button class="modal-close" onclick="closeForgotPassword()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                <div class="form-group">
+                    <input type="email" id="resetEmail" placeholder="Enter your email address" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <button class="btn btn-primary" onclick="sendResetLink()">Send Reset Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        let currentCaptcha = '';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCaptcha();
+            
+            const form = document.getElementById('loginForm');
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateLoginForm()) {
+                    loginUser();
+                }
+            });
+
+            // Real-time validation
+            const inputs = form.querySelectorAll('input[required]');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                
+                input.addEventListener('input', function() {
+                    clearError(this);
+                });
+            });
+        });
+
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let captcha = '';
+            
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            currentCaptcha = captcha;
+            document.getElementById('captchaCode').textContent = captcha;
+            document.getElementById('captchaInput').value = '';
+            
+            // Add visual effect
+            const captchaCode = document.getElementById('captchaCode');
+            captchaCode.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                captchaCode.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function validateLoginForm() {
+            let isValid = true;
+            
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            if (!validateEmail(email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            // Validate password
+            const password = document.getElementById('password').value;
+            if (password.length < 1) {
+                showError('password', 'Password is required');
+                isValid = false;
+            }
+
+            // Validate captcha
+            const captchaInput = document.getElementById('captchaInput').value.toUpperCase();
+            if (captchaInput !== currentCaptcha) {
+                showError('captcha', 'Invalid security code. Please try again.');
+                generateCaptcha();
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function validateField(field) {
+            const value = field.value.trim();
+            const fieldName = field.name;
+
+            switch(fieldName) {
+                case 'email':
+                    if (!validateEmail(value)) {
+                        showError(fieldName, 'Please enter a valid email address');
+                        return false;
+                    }
+                    break;
+                case 'password':
+                    if (value.length < 1) {
+                        showError(fieldName, 'Password is required');
+                        return false;
+                    }
+                    break;
+                case 'captcha':
+                    if (value.toUpperCase() !== currentCaptcha) {
+                        showError(fieldName, 'Invalid security code');
+                        return false;
+                    }
+                    break;
+            }
+
+            clearError(field);
+            return true;
+        }
+
+        function showError(fieldName, message) {
+            const errorElement = document.getElementById(fieldName + 'Error');
+            const field = document.getElementById(fieldName === 'captcha' ? 'captchaInput' : fieldName);
+            
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            
+            if (field) {
+                field.classList.add('error');
+            }
+        }
+
+        function clearError(field) {
+            const fieldName = field.name;
+            const errorElement = document.getElementById(fieldName + 'Error');
+            
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+            
+            field.classList.remove('error');
+        }
+
+        function loginUser() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            showLoading();
+
+            // Simulate API call
+            setTimeout(() => {
+                hideLoading();
+                
+                // Check credentials
+                const users = getFromStorage('users') || [];
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    // Set current user
+                    TradePro.setUser(user);
+                    
+                    if (rememberMe) {
+                        saveToStorage('rememberMe', true);
+                    }
+                    
+                    showToast('Login successful! Welcome back!');
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                } else {
+                    showToast('Invalid email or password. Please try again.', 'error');
+                    generateCaptcha(); // Refresh captcha on failed login
+                }
+            }, 1500);
+        }
+
+        function adminLogin() {
+            // Quick admin login for demo purposes
+            const adminUser = {
+                id: 'admin_001',
+                fullName: 'Admin User',
+                email: 'admin@tradepromlm.com',
+                mobile: '+1234567890',
+                role: 'admin',
+                registrationDate: new Date().toISOString(),
+                status: 'active',
+                package: 'admin',
+                balance: 0,
+                totalEarnings: 0
+            };
+
+            showLoading();
+            
+            setTimeout(() => {
+                hideLoading();
+                TradePro.setUser(adminUser);
+                showToast('Admin login successful!');
+                
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 1500);
+            }, 1000);
+        }
+
+        function showForgotPassword() {
+            document.getElementById('forgotPasswordModal').style.display = 'flex';
+        }
+
+        function closeForgotPassword() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+        }
+
+        function sendResetLink() {
+            const email = document.getElementById('resetEmail').value.trim();
+            
+            if (!validateEmail(email)) {
+                showToast('Please enter a valid email address', 'error');
+                return;
+            }
+
+            showLoading();
+            
+            setTimeout(() => {
+                hideLoading();
+                closeForgotPassword();
+                showToast('Password reset link sent to your email!');
+                document.getElementById('resetEmail').value = '';
+            }, 2000);
+        }
+
+        // Demo user credentials helper
+        window.addEventListener('load', function() {
+            // Add demo credentials info
+            const demoInfo = document.createElement('div');
+            demoInfo.innerHTML = `
+                <div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); color: white; padding: 15px; border-radius: 8px; font-size: 12px; max-width: 250px; z-index: 1000;">
+                    <strong>Demo Credentials:</strong><br>
+                    Email: demo@test.com<br>
+                    Password: demo123<br>
+                    <br>
+                    <strong>Admin Access:</strong><br>
+                    Use "Admin Login" button
+                </div>
+            `;
+            document.body.appendChild(demoInfo);
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                demoInfo.style.display = 'none';
+            }, 10000);
+        });
+    </script>
+
+    <style>
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 0 20px 20px;
+        }
+
+        .modal-body p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+    </style>
+</body>
+</html>

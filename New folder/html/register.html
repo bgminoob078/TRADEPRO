@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - TradePro MLM</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <!-- Left Side - Branding -->
+        <div class="auth-brand">
+            <div class="brand-content">
+                <div class="brand-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>TradePro MLM</span>
+                </div>
+                <h2>Join the Future of Trading</h2>
+                <p>Start your journey to financial freedom with our revolutionary MLM trading platform.</p>
+                
+                <div class="brand-features">
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure & Regulated</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users"></i>
+                        <span>50,000+ Active Traders</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Multiple Income Streams</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-mini">
+                    <p>"Best decision I ever made. Earning $3,000+ monthly!"</p>
+                    <div class="testimonial-author">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Sarah J. - Diamond Trader</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Registration Form -->
+        <div class="auth-form-container">
+            <div class="auth-form">
+                <div class="form-header">
+                    <h1>Create Your Account</h1>
+                    <p>Start trading and building your network today</p>
+                </div>
+
+                <form id="registerForm" class="register-form">
+                    <div class="form-group">
+                        <label for="fullName">
+                            <i class="fas fa-user"></i>
+                            Full Name
+                        </label>
+                        <input type="text" id="fullName" name="fullName" required>
+                        <span class="error-message" id="fullNameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile">
+                            <i class="fas fa-phone"></i>
+                            Mobile Number
+                        </label>
+                        <input type="tel" id="mobile" name="mobile" required>
+                        <span class="error-message" id="mobileError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="referralId">
+                            <i class="fas fa-link"></i>
+                            Referral ID (Optional)
+                        </label>
+                        <input type="text" id="referralId" name="referralId" placeholder="Enter referral code if you have one">
+                        <span class="help-text">Leave blank if you don't have a referral code</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('password', 'passwordIcon')">
+                                <i class="fas fa-eye" id="passwordIcon"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthFill"></div>
+                            </div>
+                            <span class="strength-text" id="strengthText">Enter password</span>
+                        </div>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">
+                            <i class="fas fa-lock"></i>
+                            Confirm Password
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', 'confirmPasswordIcon')">
+                                <i class="fas fa-eye" id="confirmPasswordIcon"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="confirmPasswordError"></span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a>
+                        </label>
+                        <span class="error-message" id="termsError"></span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <span class="checkmark"></span>
+                            Subscribe to our newsletter for trading tips and updates
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" id="registerBtn">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="form-footer">
+                    <p>Already have an account? <a href="login.html" class="link">Sign In</a></p>
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    <a href="../index.html" class="btn btn-outline btn-full">
+                        <i class="fas fa-home"></i>
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+
+            // Password strength checker
+            passwordInput.addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+            });
+
+            // Real-time validation
+            const inputs = form.querySelectorAll('input[required]');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                
+                input.addEventListener('input', function() {
+                    clearError(this);
+                });
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    registerUser();
+                }
+            });
+
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate full name
+                const fullName = document.getElementById('fullName').value.trim();
+                if (fullName.length < 2) {
+                    showError('fullName', 'Full name must be at least 2 characters');
+                    isValid = false;
+                }
+
+                // Validate email
+                const email = document.getElementById('email').value.trim();
+                if (!validateEmail(email)) {
+                    showError('email', 'Please enter a valid email address');
+                    isValid = false;
+                }
+
+                // Validate mobile
+                const mobile = document.getElementById('mobile').value.trim();
+                if (!validatePhone(mobile)) {
+                    showError('mobile', 'Please enter a valid mobile number');
+                    isValid = false;
+                }
+
+                // Validate password
+                const password = document.getElementById('password').value;
+                if (!validatePassword(password)) {
+                    showError('password', 'Password must be at least 8 characters');
+                    isValid = false;
+                }
+
+                // Validate confirm password
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                if (password !== confirmPassword) {
+                    showError('confirmPassword', 'Passwords do not match');
+                    isValid = false;
+                }
+
+                // Validate terms
+                const terms = document.getElementById('terms').checked;
+                if (!terms) {
+                    showError('terms', 'You must agree to the terms and conditions');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            function validateField(field) {
+                const value = field.value.trim();
+                const fieldName = field.name;
+
+                switch(fieldName) {
+                    case 'fullName':
+                        if (value.length < 2) {
+                            showError(fieldName, 'Full name must be at least 2 characters');
+                            return false;
+                        }
+                        break;
+                    case 'email':
+                        if (!validateEmail(value)) {
+                            showError(fieldName, 'Please enter a valid email address');
+                            return false;
+                        }
+                        break;
+                    case 'mobile':
+                        if (!validatePhone(value)) {
+                            showError(fieldName, 'Please enter a valid mobile number');
+                            return false;
+                        }
+                        break;
+                    case 'password':
+                        if (!validatePassword(value)) {
+                            showError(fieldName, 'Password must be at least 8 characters');
+                            return false;
+                        }
+                        break;
+                }
+
+                clearError(field);
+                return true;
+            }
+
+            function showError(fieldName, message) {
+                const errorElement = document.getElementById(fieldName + 'Error');
+                const field = document.getElementById(fieldName);
+                
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                }
+                
+                if (field) {
+                    field.classList.add('error');
+                }
+            }
+
+            function clearError(field) {
+                const errorElement = document.getElementById(field.name + 'Error');
+                
+                if (errorElement) {
+                    errorElement.style.display = 'none';
+                }
+                
+                field.classList.remove('error');
+            }
+
+            function checkPasswordStrength(password) {
+                const strengthFill = document.getElementById('strengthFill');
+                const strengthText = document.getElementById('strengthText');
+                
+                let strength = 0;
+                let text = 'Weak';
+                let color = '#ef4444';
+
+                if (password.length >= 8) strength += 25;
+                if (/[a-z]/.test(password)) strength += 25;
+                if (/[A-Z]/.test(password)) strength += 25;
+                if (/[0-9]/.test(password)) strength += 25;
+
+                if (strength >= 75) {
+                    text = 'Strong';
+                    color = '#10b981';
+                } else if (strength >= 50) {
+                    text = 'Medium';
+                    color = '#f59e0b';
+                }
+
+                strengthFill.style.width = strength + '%';
+                strengthFill.style.background = color;
+                strengthText.textContent = text;
+                strengthText.style.color = color;
+            }
+
+            function registerUser() {
+                const formData = new FormData(form);
+                const userData = {
+                    id: generateId(),
+                    fullName: formData.get('fullName'),
+                    email: formData.get('email'),
+                    mobile: formData.get('mobile'),
+                    referralId: formData.get('referralId') || null,
+                    password: formData.get('password'),
+                    newsletter: formData.get('newsletter') === 'on',
+                    registrationDate: new Date().toISOString(),
+                    status: 'active',
+                    package: 'basic',
+                    balance: 0,
+                    totalEarnings: 0,
+                    directReferrals: 0,
+                    teamSize: 0
+                };
+
+                showLoading();
+
+                // Simulate API call
+                setTimeout(() => {
+                    hideLoading();
+                    
+                    // Save user data
+                    const users = getFromStorage('users') || [];
+                    
+                    // Check if email already exists
+                    if (users.find(user => user.email === userData.email)) {
+                        showToast('Email already registered. Please use a different email.', 'error');
+                        return;
+                    }
+                    
+                    users.push(userData);
+                    saveToStorage('users', users);
+                    
+                    // Set current user
+                    TradePro.setUser(userData);
+                    
+                    showToast('Registration successful! Welcome to TradePro MLM!');
+                    
+                    // Redirect to dashboard after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>

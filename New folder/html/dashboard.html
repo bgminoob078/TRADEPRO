@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TradePro MLM</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>TradePro MLM</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#overview" class="nav-item active" data-section="overview">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Overview</span>
+            </a>
+            <a href="#profile" class="nav-item" data-section="profile">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="#team" class="nav-item" data-section="team">
+                <i class="fas fa-users"></i>
+                <span>My Team</span>
+            </a>
+            <a href="#packages" class="nav-item" data-section="packages">
+                <i class="fas fa-box"></i>
+                <span>Packages</span>
+            </a>
+            <a href="#withdraw" class="nav-item" data-section="withdraw">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Withdraw</span>
+            </a>
+            <a href="#payment" class="nav-item" data-section="payment">
+                <i class="fas fa-credit-card"></i>
+                <span>Payment</span>
+            </a>
+            <a href="#transactions" class="nav-item" data-section="transactions">
+                <i class="fas fa-history"></i>
+                <span>Transactions</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="TradePro.logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 id="pageTitle">Dashboard Overview</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Loading...</span>
+                        <span class="user-package" id="userPackage">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Sections -->
+        <div class="content-wrapper">
+            <!-- Overview Section -->
+            <section id="overview-section" class="content-section active">
+                <div class="welcome-card">
+                    <h2>Welcome back, <span id="welcomeName">User</span>!</h2>
+                    <p>Here's your trading and network overview</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalBalance">$0.00</h3>
+                            <p>Available Balance</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalEarnings">$0.00</h3>
+                            <p>Total Earnings</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="directReferrals">0</h3>
+                            <p>Direct Referrals</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="teamSize">0</h3>
+                            <p>Team Size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referral Link Card -->
+                <div class="referral-card">
+                    <h3>Your Referral Link</h3>
+                    <div class="referral-input-group">
+                        <input type="text" id="referralLink" readonly>
+                        <button onclick="copyReferralLink()" class="copy-btn">
+                            <i class="fas fa-copy"></i>
+                            Copy
+                        </button>
+                    </div>
+                    <p>Share this link to earn commissions from new referrals</p>
+                </div>
+
+                <!-- Income Breakdown -->
+                <div class="income-breakdown">
+                    <h3>Income Breakdown</h3>
+                    <div class="income-grid">
+                        <div class="income-item">
+                            <span class="income-label">Direct Commission</span>
+                            <span class="income-amount" id="directIncome">$0.00</span>
+                        </div>
+                        <div class="income-item">
+                            <span class="income-label">Level Bonus</span>
+                            <span class="income-amount" id="levelIncome">$0.00</span>
+                        </div>
+                        <div class="income-item">
+                            <span class="income-label">Matching Bonus</span>
+                            <span class="income-amount" id="matchingIncome">$0.00</span>
+                        </div>
+                        <div class="income-item">
+                            <span class="income-label">Leadership Bonus</span>
+                            <span class="income-amount" id="leadershipIncome">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section">
+                <div class="section-header">
+                    <h2>Edit Profile</h2>
+                    <p>Update your personal information</p>
+                </div>
+
+                <div class="profile-form-container">
+                    <form id="profileForm" class="profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profileName">Full Name</label>
+                                <input type="text" id="profileName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email Address</label>
+                                <input type="email" id="profileEmail" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profileMobile">Mobile Number</label>
+                                <input type="tel" id="profileMobile" name="mobile" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePackage">Current Package</label>
+                                <input type="text" id="profilePackage" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password (leave blank to keep current)</label>
+                            <input type="password" id="newPassword" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Update Profile
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section id="team-section" class="content-section">
+                <div class="section-header">
+                    <h2>My Team</h2>
+                    <p>View your referral network structure</p>
+                </div>
+
+                <div class="team-container">
+                    <div id="teamTree" class="team-tree">
+                        <!-- Team tree will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Packages Section -->
+            <section id="packages-section" class="content-section">
+                <div class="section-header">
+                    <h2>Upgrade Package</h2>
+                    <p>Choose a higher package to unlock more features</p>
+                </div>
+
+                <div class="packages-grid" id="packagesGrid">
+                    <!-- Packages will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Withdraw Section -->
+            <section id="withdraw-section" class="content-section">
+                <div class="section-header">
+                    <h2>Withdraw Funds</h2>
+                    <p>Request withdrawal of your available balance</p>
+                </div>
+
+                <div class="withdraw-container">
+                    <div class="withdraw-form-card">
+                        <form id="withdrawForm" class="withdraw-form">
+                            <div class="form-group">
+                                <label for="withdrawAmount">Withdrawal Amount</label>
+                                <input type="number" id="withdrawAmount" name="amount" min="10" step="0.01" required>
+                                <span class="help-text">Available Balance: $<span id="availableBalance">0.00</span></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="withdrawMethod">Payment Method</label>
+                                <select id="withdrawMethod" name="method" required>
+                                    <option value="">Select payment method</option>
+                                    <option value="bank">Bank Transfer</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="crypto">Cryptocurrency</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="withdrawDetails">Payment Details</label>
+                                <textarea id="withdrawDetails" name="details" rows="3" 
+                                         placeholder="Enter your payment details (account number, wallet address, etc.)" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit Withdrawal Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payment Section -->
+            <section id="payment-section" class="content-section">
+                <div class="section-header">
+                    <h2>Make Payment</h2>
+                    <p>Deposit funds or upgrade your package</p>
+                </div>
+
+                <div class="payment-container">
+                    <div class="payment-card">
+                        <h3>Admin Payment Details</h3>
+                        <div class="qr-code-container">
+                            <div class="qr-code" id="adminQRCode">
+                                <!-- QR Code will be generated here -->
+                            </div>
+                        </div>
+                        <div class="payment-instructions">
+                            <h4>Payment Instructions:</h4>
+                            <ol>
+                                <li>Scan the QR code above with your payment app</li>
+                                <li>Send the exact amount for your package or deposit</li>
+                                <li>Take a screenshot of the payment confirmation</li>
+                                <li>Contact admin with your payment proof</li>
+                            </ol>
+                            <div class="admin-contact">
+                                <p><strong>Admin Contact:</strong></p>
+                                <p>Email: admin@tradepromlm.com</p>
+                                <p>WhatsApp: +1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions Section -->
+            <section id="transactions-section" class="content-section">
+                <div class="section-header">
+                    <h2>Transaction History</h2>
+                    <p>View all your transactions and earnings</p>
+                </div>
+
+                <div class="transactions-container">
+                    <div class="transactions-table-container">
+                        <table class="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTableBody">
+                                <!-- Transactions will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
